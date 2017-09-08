@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">CMPUT301_Assign_1</string>
+    <string name="app_title">CountBook</string>
+    <string name="new_item">new</string>
+    <string name="enter_your_title">Add a Title</string>
+    <string name="add">+</string>
+    <string name="subtract">-</string>
+    <string name="submit">Submit</string>
+    <string name="title_hint">Todays calories</string>
 </resources>
