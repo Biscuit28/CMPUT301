@@ -9,4 +9,6 @@
     <string name="title_hint">Todays calories</string>
     <string name="initial_value_prompt">Enter Initial Value</string>
     <string name="initial_value_hint">450</string>
+    <string name="set_default">Reset to default</string>
+    <string name="delete_item">Delete Item</string>
 </resources>
