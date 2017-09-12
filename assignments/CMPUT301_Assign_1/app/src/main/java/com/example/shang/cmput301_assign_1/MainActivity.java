@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         int item_count = Integer.parseInt(item_count_str);
         for (int i = 1; i <= item_count; i++){
             String title = sharedPref.getString(String.format("item_header_%d", i), "NULL");
-            System.out.println(i);
+//            System.out.println(i);
             itemList.add(title);
         }
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, itemList);
@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         myListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                System.out.println(String.format("POSITION IS %s", position));
+//                System.out.println(String.format("POSITION IS %s", position+1));
                 Intent view_item_intent = new Intent(MainActivity.this, EditItemActivity.class);
                 view_item_intent.putExtra("position", Integer.toString(position+1));
                 startActivity(view_item_intent);
