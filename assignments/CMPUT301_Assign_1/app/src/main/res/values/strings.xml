@@ -11,4 +11,5 @@
     <string name="initial_value_hint">450</string>
     <string name="set_default">Reset to default</string>
     <string name="delete_item">Delete Item</string>
+    <string name="reset">reset</string>
 </resources>

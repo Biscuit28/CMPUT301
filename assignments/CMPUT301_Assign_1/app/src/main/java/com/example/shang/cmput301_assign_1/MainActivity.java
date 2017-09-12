@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -16,13 +18,17 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ArrayList<String> itemList = new ArrayList<String>();
         setContentView(R.layout.activity_main);
+        createList();
+    }
+
+    public void createList(){
+        ArrayList<String> itemList = new ArrayList<String>();
         SharedPreferences sharedPref = getSharedPreferences("book_counts", Context.MODE_PRIVATE);
         String item_count_str = sharedPref.getString("max_item", "0");
         int item_count = Integer.parseInt(item_count_str);
-        for (int i = 0; i <= item_count; i++){
-            String title = sharedPref.getString(String.format("item_title_%d", i), "NULL");
+        for (int i = 1; i <= item_count; i++){
+            String title = sharedPref.getString(String.format("item_header_%d", i), "NULL");
             System.out.println(i);
             itemList.add(title);
         }
@@ -34,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 System.out.println(String.format("POSITION IS %s", position));
                 Intent view_item_intent = new Intent(MainActivity.this, EditItemActivity.class);
-                view_item_intent.putExtra("position", Integer.toString(position));
+                view_item_intent.putExtra("position", Integer.toString(position+1));
                 startActivity(view_item_intent);
             }
         });
@@ -43,5 +49,15 @@ public class MainActivity extends AppCompatActivity {
     public void newEntry(View view) {
         Intent new_item_intent = new Intent(this, AddItemActivity.class);
         startActivity(new_item_intent);
+
+    }
+
+    public void resetAll(View view) {
+        SharedPreferences sharedPref = getSharedPreferences("book_counts", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.clear();
+        editor.commit();
+        createList();
+        Toast.makeText(this,  "countbook cleared!", Toast.LENGTH_SHORT).show();
     }
 }
