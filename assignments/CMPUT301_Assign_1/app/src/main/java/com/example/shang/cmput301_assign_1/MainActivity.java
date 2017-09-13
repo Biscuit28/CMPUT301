@@ -9,11 +9,14 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+
+    int item_count;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,11 +28,16 @@ public class MainActivity extends AppCompatActivity {
     public void createList(){
         ArrayList<String> itemList = new ArrayList<String>();
         SharedPreferences sharedPref = getSharedPreferences("book_counts", Context.MODE_PRIVATE);
-        String item_count_str = sharedPref.getString("max_item", "0");
-        int item_count = Integer.parseInt(item_count_str);
+        item_count = Integer.parseInt(sharedPref.getString("max_item", "0"));
+        TextView summary_text = (TextView) findViewById(R.id.counter_summary);
+        if (item_count == 0) {
+            summary_text.setText("You have no items in Countbook!");
+        }else{
+            String plr = (item_count > 1) ? "items":"item";
+            summary_text.setText(String.format("you have %d %s in your Countbook!", item_count, plr));
+        }
         for (int i = 1; i <= item_count; i++){
             String title = sharedPref.getString(String.format("item_header_%d", i), "NULL");
-//            System.out.println(i);
             itemList.add(title);
         }
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, itemList);
@@ -38,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
         myListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                System.out.println(String.format("POSITION IS %s", position+1));
                 Intent view_item_intent = new Intent(MainActivity.this, EditItemActivity.class);
                 view_item_intent.putExtra("position", Integer.toString(position+1));
                 startActivity(view_item_intent);
@@ -49,7 +56,6 @@ public class MainActivity extends AppCompatActivity {
     public void newEntry(View view) {
         Intent new_item_intent = new Intent(this, AddItemActivity.class);
         startActivity(new_item_intent);
-
     }
 
     public void resetAll(View view) {

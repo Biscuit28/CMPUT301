@@ -12,4 +12,14 @@
     <string name="set_default">Reset to default</string>
     <string name="delete_item">Delete Item</string>
     <string name="reset">reset</string>
+    <string name="details">details</string>
+    <!--Counter Detail strings-->
+    <string name="title_detail">Details</string>
+    <string name="sub_title_name">Title</string>
+    <string name="sub_title_currcount">Current Value</string>
+    <string name="sub_title_defaultval">Default Value</string>
+    <string name="sub_title_description">Description</string>
+    <string name="btn_apply">apply</string>
+    <string name="btn_delete">delete</string>
+    <string name="back">back</string>
 </resources>

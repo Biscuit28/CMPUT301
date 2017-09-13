@@ -69,33 +69,14 @@ public class EditItemActivity extends AppCompatActivity {
         changeCounter(Integer.parseInt(view.getTag().toString()));
     }
 
-    public void deleteItem(View view) {
-        SharedPreferences sharedPref = getSharedPreferences("book_counts", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        int max_counter = Integer.parseInt(sharedPref.getString("max_item", "NULL"));
-//        System.out.println(String.format("MAXCOUNTER %d", max_counter));
-//        System.out.println("CURRENT POSITION "+currentPosition);
-        for (int i = Integer.parseInt(currentPosition); i <= max_counter; i++){
-            if (i != max_counter) {
-//                System.out.println(String.format("%d %s", i, sharedPref.getString("item_header_"+Integer.toString(i+1), "BREADPUDDING")));
-//                System.out.println(String.format("%d %s", i, sharedPref.getString("item_title_"+Integer.toString(i+1), "BREADPUDDING")));
-//                System.out.println(String.format("%d %s", i, sharedPref.getString("item_timeStamp_"+Integer.toString(i+1), "BREADPUDDING")));
-//                System.out.println(String.format("%d %s", i, sharedPref.getString("item_defaultval_"+Integer.toString(i+1), "BREADPUDDING")));
-//                System.out.println(String.format("%d %s", i, sharedPref.getString("item_count_"+Integer.toString(i+1), "BREADPUDDING")));
-
-                editor.putString("item_header_"+Integer.toString(i), sharedPref.getString("item_header_"+Integer.toString(i+1), "BREADPUDDING"));
-                editor.putString("item_title_"+Integer.toString(i), sharedPref.getString("item_title_"+Integer.toString(i+1), "BREADPUDDING"));
-                editor.putString("item_timeStamp_"+Integer.toString(i), sharedPref.getString("item_timeStamp_"+Integer.toString(i+1), "BREADPUDDING"));
-                editor.putString("item_defaultval_"+Integer.toString(i), sharedPref.getString("item_defaultval_"+Integer.toString(i+1), "BREADPUDDING YEYEY"));
-                editor.putString("item_count_"+Integer.toString(i), sharedPref.getString("item_count_"+Integer.toString(i+1), "BREADPUDDING"));
-            }
-        }
-        editor.putString("max_item", Integer.toString(max_counter-1));
-        editor.apply();
-        Intent afterdDelete = new Intent(this, MainActivity.class);
-        startActivity(afterdDelete);
-        Toast.makeText(this, "item deleted!", Toast.LENGTH_SHORT).show();
+    public void viewDetails(View view) {
+        Intent details = new Intent(this, viewDetailActivity.class);
+        details.putExtra("position_detail", currentPosition);
+        startActivity(details);
     }
 
-    //TODO - complete the delete function, add time stamp
+    public void backToMain(View view) {
+        Intent mainActivity = new Intent(this, MainActivity.class);
+        startActivity(mainActivity);
+    }
 }

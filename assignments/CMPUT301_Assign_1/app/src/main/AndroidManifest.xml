@@ -17,7 +17,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".AddItemActivity" />
-        <activity android:name=".EditItemActivity"></activity>
+        <activity android:name=".EditItemActivity" />
+        <activity android:name=".viewDetailActivity"
+            android:theme="@style/AppTheme.CustomTheme"
+            ></activity>
     </application>
 
 </manifest>
