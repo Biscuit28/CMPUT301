@@ -32,10 +32,8 @@ public class EditItemActivity extends AppCompatActivity {
     public void updateScreen(){
         TextView count_text = (TextView) findViewById(R.id.item_count);
         TextView count_title = (TextView) findViewById(R.id.counter_title);
-        TextView count_date = (TextView) findViewById(R.id.counter_date);
         count_text.setText(currCount_str);
         count_title.setText(countTitle);
-        count_date.setText(countDate);
     }
 
     public void changeCounter(int option){
