@@ -55,7 +55,7 @@ public class viewDetailActivity extends AppCompatActivity {
                 return false;
             }else {
                 String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(Calendar.getInstance().getTime());
-                editor.putString("item_header_"+position, String.format("%s   updated on: %s   count: %s", new_title, timeStamp, val_default));
+                editor.putString("item_header_"+position, String.format("%s   updated on: %s   count: %s", new_title, timeStamp, value));
                 editor.putString("item_title_"+position, new_title);
                 editor.putString("item_count_"+position, value);
                 editor.putString("item_defaultVal_"+position, val_default);
