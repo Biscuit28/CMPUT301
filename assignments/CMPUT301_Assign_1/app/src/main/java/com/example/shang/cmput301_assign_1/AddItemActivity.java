@@ -1,8 +1,6 @@
 package com.example.shang.cmput301_assign_1;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.icu.text.SimpleDateFormat;
 import android.icu.util.Calendar;
 import android.support.v7.app.AppCompatActivity;
@@ -14,26 +12,13 @@ import android.widget.Toast;
 
 public class AddItemActivity extends AppCompatActivity {
 
+    PreferenceManager pm;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_item);
-    }
-
-
-    public void addItem(String title, String timeStamp, String defaultVal) {
-        SharedPreferences sharedPref = getSharedPreferences("book_counts", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        String maxItems_str = sharedPref.getString("max_item", "0");
-        int maxItems = Integer.parseInt(maxItems_str) + 1;
-        maxItems_str = Integer.toString(maxItems);
-        editor.putString("max_item", maxItems_str);
-        editor.putString("item_header_"+maxItems_str, String.format("%s   updated on: %s   count: %s", title, timeStamp, defaultVal));
-        editor.putString("item_title_"+maxItems_str, title);
-        editor.putString("item_timeStamp_"+maxItems_str, timeStamp);
-        editor.putString("item_defaultval_"+maxItems_str, defaultVal);
-        editor.putString("item_count_"+maxItems_str, defaultVal);
-        editor.apply();
+        pm = new PreferenceManager(this);
     }
 
     public void submitEntry(View view) {
@@ -50,7 +35,7 @@ public class AddItemActivity extends AppCompatActivity {
         }
         else {
             String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(Calendar.getInstance().getTime());
-            addItem(title, timeStamp, defaultVal);
+            pm.addNewItem(title, timeStamp, defaultVal);
             Toast.makeText(this, "added to countbook!", Toast.LENGTH_SHORT).show();
             startActivity(afterSubmit);
         }

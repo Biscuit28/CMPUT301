@@ -1,8 +1,6 @@
 package com.example.shang.cmput301_assign_1;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -12,35 +10,24 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    int item_count;
+    PreferenceManager pm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        pm = new PreferenceManager(this);
         createList();
     }
 
     public void createList(){
-        ArrayList<String> itemList = new ArrayList<String>();
-        SharedPreferences sharedPref = getSharedPreferences("book_counts", Context.MODE_PRIVATE);
-        item_count = Integer.parseInt(sharedPref.getString("max_item", "0"));
         TextView summary_text = (TextView) findViewById(R.id.counter_summary);
-        if (item_count == 0) {
-            summary_text.setText("You have no items in Countbook!");
-        }else{
-            String plr = (item_count > 1) ? "items":"item";
-            summary_text.setText(String.format("you have %d %s in your Countbook!", item_count, plr));
-        }
-        for (int i = 1; i <= item_count; i++){
-            String title = sharedPref.getString(String.format("item_header_%d", i), "NULL");
-            itemList.add(title);
-        }
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, itemList);
+        String plr = (pm.getMax() > 1) ? "items":"item";
+        summary_text.setText(String.format("You have %d %s in CountBook", pm.getMax(), plr));
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, pm.getHeaders());
         ListView myListView = (ListView) findViewById(R.id.listView);
         myListView.setAdapter(arrayAdapter);
         myListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -59,10 +46,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void resetAll(View view) {
-        SharedPreferences sharedPref = getSharedPreferences("book_counts", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.clear();
-        editor.commit();
+        pm.resetPref();
         createList();
         Toast.makeText(this,  "countbook cleared!", Toast.LENGTH_SHORT).show();
     }
