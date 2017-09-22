@@ -19,15 +19,6 @@ public class PreferenceManager {
         editor = sharedPref.edit();
     }
 
-    public ArrayList<String> getHeaders(){
-        int maxCount = getMax();
-        ArrayList<String> headers = new ArrayList<String>();
-        for (int i = 1; i <= maxCount; i++){
-            headers.add(sharedPref.getString(String.format("item_header_%d", i), "NULL"));
-        }
-        return headers;
-    }
-
     public String getString(String title, int position, String error){
         return sharedPref.getString(String.format("%s_%d", title, position), error);
     }
@@ -37,13 +28,22 @@ public class PreferenceManager {
         editor.apply();
     }
 
+    public int getMax(){
+        return Integer.parseInt(sharedPref.getString("max_item", "0"));
+    }
+
     public void updateMax(int increment){
         editor.putString("max_item", Integer.toString(getMax()+increment));
         editor.apply();
     }
 
-    public int getMax(){
-        return Integer.parseInt(sharedPref.getString("max_item", "0"));
+    public ArrayList<String> getHeaders(){
+        int maxCount = getMax();
+        ArrayList<String> headers = new ArrayList<String>();
+        for (int i = 1; i <= maxCount; i++){
+            headers.add(sharedPref.getString(String.format("item_header_%d", i), "NULL"));
+        }
+        return headers;
     }
 
     public void addNewItem(String title, String date, String defaultValue){
