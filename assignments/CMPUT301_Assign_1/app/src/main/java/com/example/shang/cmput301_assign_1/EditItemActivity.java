@@ -8,8 +8,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.app.Activity;
 
-public class EditItemActivity extends AppCompatActivity {
+public class EditItemActivity extends Activity {
 
     PreferenceManager pm;
     int position;

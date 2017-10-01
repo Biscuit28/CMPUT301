@@ -8,9 +8,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+import android.app.Activity;
 
 
-public class AddItemActivity extends AppCompatActivity {
+public class AddItemActivity extends Activity {
 
     PreferenceManager pm;
 

@@ -9,9 +9,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.app.Activity;
 
-
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity {
 
     PreferenceManager pm;
 

@@ -10,8 +10,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.app.Activity;
 
-public class viewDetailActivity extends AppCompatActivity {
+public class viewDetailActivity extends Activity {
 
     PreferenceManager pm;
     int position;
