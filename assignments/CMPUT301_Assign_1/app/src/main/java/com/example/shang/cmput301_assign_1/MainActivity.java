@@ -15,6 +15,10 @@ import android.app.Activity;
  * Main screen
  *
  * mainActivity
+ *
+ * NOTE that there is scaling issues with this app. In particular, this app runs well on
+ * large screens such as nexus 6, but for screens such as nexus 5 the date in view detail activity
+ * will be cutout by the multiline Textview.
  */
 public class MainActivity extends Activity {
 
