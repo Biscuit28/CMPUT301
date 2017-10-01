@@ -35,11 +35,13 @@ public class viewDetailActivity extends Activity {
         EditText title_field = (EditText) findViewById(R.id.editText_title);
         EditText count_field = (EditText) findViewById(R.id.editText_count);
         EditText default_field = (EditText) findViewById(R.id.editText_default);
+        EditText description_field = (EditText) findViewById(R.id.editText_description);
         TextView detail_date = (TextView) findViewById(R.id.date_detail);
         if (option) {
             String title_new = title_field.getText().toString();
             String value_new = count_field.getText().toString();
             String val_default_new = default_field.getText().toString();
+            String description_new = description_field.getText().toString();
             String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(Calendar.getInstance().getTime());
             if (title_new.isEmpty()){
                 Toast.makeText(this, "title cannot be empty", Toast.LENGTH_SHORT).show();
@@ -55,6 +57,7 @@ public class viewDetailActivity extends Activity {
                 pm.putString("item_title", position, title_new);
                 pm.putString("item_count", position, value_new);
                 pm.putString("item_defaultval", position, val_default_new);
+                pm.putString("item_description", position, description_new);
                 pm.putString("item_timeStamp", position, timeStamp);
                 return true;
             }
@@ -62,6 +65,7 @@ public class viewDetailActivity extends Activity {
             title_field.setText(pm.getString("item_title", position, ""));
             count_field.setText(pm.getString("item_count", position, ""));
             default_field.setText(pm.getString("item_defaultval", position, ""));
+            description_field.setText(pm.getString("item_description", position, ""));
             detail_date.setText(pm.getString("item_timeStamp", position, "ERROR"));
             return true;
         }

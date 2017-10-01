@@ -12,7 +12,7 @@ public class PreferenceManager {
 
     private SharedPreferences sharedPref;
     private SharedPreferences.Editor editor;
-    private String[] fields = {"item_header", "item_title", "item_timeStamp", "item_defaultval", "item_count"};
+    private String[] fields = {"item_header", "item_title", "item_timeStamp", "item_defaultval", "item_count", "item_description"};
 
     public PreferenceManager(Context context){
         sharedPref = context.getSharedPreferences("book_counts", Context.MODE_PRIVATE);
@@ -46,13 +46,14 @@ public class PreferenceManager {
         return headers;
     }
 
-    public void addNewItem(String title, String date, String defaultValue){
+    public void addNewItem(String title, String date, String defaultValue, String description){
         updateMax(1);
         putString("item_header", getMax(), String.format("%s   updated on: %s   count: %s", title, date, defaultValue));
         putString("item_title", getMax(), title);
         putString("item_timeStamp", getMax(), date);
         putString("item_defaultval", getMax(), defaultValue);
         putString("item_count", getMax(), defaultValue);
+        putString("item_description", getMax(), description);
     }
 
     public void deleteItem(int position){

@@ -22,4 +22,6 @@
     <string name="btn_apply">apply</string>
     <string name="btn_delete">delete</string>
     <string name="back">back</string>
+    <string name="add_a_description">Add a Description</string>
+    <string name="my_calorie_count">My Calorie Count</string>
 </resources>
